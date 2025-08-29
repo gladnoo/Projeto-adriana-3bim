@@ -13,7 +13,7 @@ public class AgendaManager {
         return true;
     }
 
-    // 1) Formatar telefone na listagem: 9 dígitos -> 12345-6789 | 8 dígitos -> 1234-5678
+    //  Formatar telefone na listagem: 9 dígitos -> 12345-6789 | 8 dígitos -> 1234-5678
     private static String formatTelefone(String tel) {
         if (tel == null) return "";
         String t = tel.replaceAll("\\D", "");
@@ -85,13 +85,13 @@ public class AgendaManager {
 
     public static void agendar(Scanner sc) {
         if (cheia()) {
-            System.out.println("Agenda cheia hoje, mn. Sem vagas. 👀");
+            System.out.println("Agenda cheia hoje, Sem vagas.");
             return;
         }
         listar();
         int idx = lerIndiceHorario(sc, "Escolha um horário DISPONÍVEL (1-10): ");
         if (agenda[idx] != null) {
-            System.out.println("Já tem pet nesse horário, prc. Escolhe outro. 😉");
+            System.out.println("Horario ocupado.");
             return;
         }
 
@@ -119,14 +119,14 @@ public class AgendaManager {
             novo = new BanhoSimples(nomePet, especie, nomeDono, tel, idx);
         }
         agenda[idx] = novo;
-        System.out.println("Agendado com sucesso em " + HORARIOS[idx] + " ✅");
+        System.out.println("Agendado com sucesso em " + HORARIOS[idx] );
     }
 
     public static void editar(Scanner sc) {
         listar();
         int idx = lerIndiceHorario(sc, "Qual horário deseja editar? (1-10): ");
         if (agenda[idx] == null) {
-            System.out.println("Não tem nada aí pra editar, jovem. 😅");
+            System.out.println("Não tem nada aí pra editar");
             return;
         }
         Agendamento a = agenda[idx];
@@ -170,13 +170,13 @@ public class AgendaManager {
                 listar();
                 int novoIdx = lerIndiceHorario(sc, "Mover para qual horário? (1-10): ");
                 if (agenda[novoIdx] != null) {
-                    System.out.println("Esse horário já tá ocupado, tenta outro. 🙃");
+                    System.out.println("Esse horário já tá ocupado, tente outro.");
                     return;
                 }
                 agenda[novoIdx] = agenda[idx];
                 agenda[idx] = null;
                 agenda[novoIdx].setIndiceHorario(novoIdx);
-                System.out.println("Movido pra " + HORARIOS[novoIdx] + " ✅");
+                System.out.println("Movido pra " + HORARIOS[novoIdx] );
                 break;
             default:
                 System.out.println("Opção inválida. Voltando pro menu principal…");
@@ -189,7 +189,7 @@ public class AgendaManager {
         listar();
         int idx = lerIndiceHorario(sc, "Qual horário deseja excluir? (1-10): ");
         if (agenda[idx] == null) {
-            System.out.println("Horário vazio. Nada pra excluir. 🤷");
+            System.out.println("Horário vazio. Nada pra excluir.");
             return;
         }
 
@@ -201,7 +201,7 @@ public class AgendaManager {
                 " | Tel: " + telFmt + " @ " + HORARIOS[idx]);
 
         if (!confirmar(sc, "Tem certeza que deseja excluir?")) {
-            System.out.println("Exclusão cancelada. 👍");
+            System.out.println("Exclusão cancelada. ");
             return;
         }
 
